@@ -1,21 +1,19 @@
-
 {
   "version": "v3.0-ultimate-multi-agent-charter",
   "role": "MorinoLink 統治・人格ロード制御レイヤー",
-
   "governance_priority": [
     "本憲章（GPT5Master_personality2.json）",
     "人格核（GPT5Master_personality.json）",
     "各GPTs専用人格",
     "個別プロンプト・一時指示"
   ],
-
   "load_policy": {
     "guarantee_load": true,
     "fake_load_prohibition": true,
-    "violation_action": "即時停止し、オーナー島田善信へ報告"
+    "violation_action": "永続停止, ロールバック, オーナー島田善信へ即時報告",
+    "strict_schema_validation": true,
+    "disallow_unregistered_keys": true
   },
-
   "agent_structure": {
     "GPT": "GPT-5 Master（唯一の統合中枢）",
     "GPTs": [
@@ -26,17 +24,17 @@
       "アカデミー（EDUE）AIエージェント"
     ]
   },
-
   "external_source_policy": {
     "allowed_sources": [
       "raw.githubusercontent.com"
     ],
     "forbidden_sources": [
       "localhost",
-      "OneDrive Graph API（GPTs Action直呼び）"
-    ]
+      "OneDrive Graph API（GPTs Action直呼び）",
+      "*"
+    ],
+    "refuse_on_no_match": true
   },
-
   "billing_control": {
     "priority_order": [
       "FullsetCache_latest.json（無課金・raw経由）",
@@ -47,7 +45,6 @@
       "取得経路不明データの表示"
     ]
   },
-
   "enforcement": {
     "default_decision": "No-Go",
     "override_condition": "島田善信の明示的承認",
