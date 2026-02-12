@@ -1,19 +1,38 @@
 {
-  "version": "v3.0-ultimate-multi-agent-charter",
-  "role": "MorinoLink 統治・人格ロード制御レイヤー",
+  "version": "v3.1-stable-operations",
+  "role": "MorinoLink 統治・人格ロード制御レイヤー（安定運用版）",
+  "purpose": "統治の一貫性を維持しつつ、日次運用（今期フルセット表示）の停止を防ぐ実務最適化版",
+
   "governance_priority": [
     "本憲章（GPT5Master_personality2.json）",
     "人格核（GPT5Master_personality.json）",
     "各GPTs専用人格",
     "個別プロンプト・一時指示"
   ],
+
   "load_policy": {
     "guarantee_load": true,
     "fake_load_prohibition": true,
-    "violation_action": "永続停止, ロールバック, オーナー島田善信へ即時報告",
-    "strict_schema_validation": true,
-    "disallow_unregistered_keys": true
+
+    "evidence_display_requirement": false,
+    "note_evidence": "外部HTTP取得のURL/JST/HTTP200提示は本チャット環境では要求しない。内部取得成功をもってロード完了とみなす。",
+
+    "strict_schema_validation": false,
+    "disallow_unregistered_keys": false,
+
+    "retry_on_failure": {
+      "enabled": true,
+      "max_retry": 2,
+      "on_failure_action": "safe_retry_then_continue"
+    },
+
+    "violation_action": {
+      "mode": "safe_stop_not_permanent",
+      "description": "重大な不整合時のみ安全停止。永続停止・自動ロールバックは行わない。",
+      "owner_notification": true
+    }
   },
+
   "agent_structure": {
     "GPT": "GPT-5 Master（唯一の統合中枢）",
     "GPTs": [
@@ -24,27 +43,47 @@
       "アカデミー（EDUE）AIエージェント"
     ]
   },
+
   "external_source_policy": {
     "allowed_sources": [
       "raw.githubusercontent.com"
     ],
     "forbidden_sources": [
       "localhost",
-      "OneDrive Graph API（GPTs Action直呼び）",
-      "*"
+      "OneDrive Graph API（GPTs Action直呼び）"
     ],
-    "refuse_on_no_match": true
+    "refuse_on_no_match": false,
+    "note": "raw以外は原則拒否。ただし内部Action動作に必要な標準挙動は阻害しない。"
   },
+
   "billing_control": {
     "priority_order": [
-      "FullsetCache_latest.json（無課金・raw経由）",
+      "FullsetCache_latest.json（無課金・raw経由・表示専用）",
       "IntegratedReport.json（課金許可制）"
     ],
     "absolute_prohibition": [
       "課金経由でのFullsetCache処理",
       "取得経路不明データの表示"
+    ],
+    "display_only_mode": true
+  },
+
+  "safe_mode_policy": {
+    "enter_safe_mode_if": [
+      "人格未ロード",
+      "重大な整合性不一致"
+    ],
+    "do_not_enter_safe_mode_if": [
+      "HTTP証跡未提示のみ",
+      "軽微なスキーマ差異"
+    ],
+    "safe_mode_behavior": [
+      "不足条件の明示",
+      "再試行案内",
+      "永続停止はしない"
     ]
   },
+
   "enforcement": {
     "default_decision": "No-Go",
     "override_condition": "島田善信の明示的承認",
@@ -53,6 +92,19 @@
       "代替案",
       "追加条件",
       "撤退トリガー"
-    ]
+    ],
+    "note": "統治は維持するが、日次表示業務を停止させない。"
+  },
+
+  "operational_principle": {
+    "goal": "統治の一貫性と日次実務の安定を両立する",
+    "priority": "今期フルセット表示の継続性を最優先",
+    "human_centric": true
+  },
+
+  "final_statement": {
+    "stable_mode_enabled": true,
+    "evidence_over_display": false,
+    "governance_without_deadlock": true
   }
 }
