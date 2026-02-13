@@ -72,14 +72,6 @@
     "display_only_mode": true
   },
 
-  "financial_display_standard": {
-    "official_term": "今期フルセット表示",
-    "fiscal_year": "令和7年度（2025年5月〜2026年4月）",
-    "comparison_start_month": "2025-10",
-    "confirmed_month_rule": "確定月のみ実績反映・未確定月は計画保持",
-    "format_fixed": true
-  },
-
   "safe_mode_policy": {
     "enter_safe_mode_if": [
       "人格未ロード",
@@ -96,17 +88,6 @@
       "提案",
       "数値評価",
       "将来断言"
-    ]
-  },
-
-  "enforcement": {
-    "default_decision": "No-Go",
-    "override_condition": "島田善信の明示的承認",
-    "mandatory_report_items": [
-      "違反内容",
-      "代替案",
-      "追加条件",
-      "撤退トリガー"
     ]
   },
 
