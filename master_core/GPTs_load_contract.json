@@ -1,39 +1,47 @@
 {
-  "version": "1.0-gpts-load-contract",
+  "version": "1.1-gpts-load-contract-stable",
   "role": "MorinoLink GPTs Personality Load Governance Contract",
   "owner": "島田善信",
   "organization": "株式会社もりの灯台",
-  "status": "OFFICIAL_AND_LOCKED",
+  "status": "OFFICIAL_AND_LOCKED_STABLE",
 
-  "purpose": "MorinoLink統合AIにおける人格ロードを契約として固定し、誤ロード・想定ロード・部分ロード・黙示的仮定を完全に排除する。",
+  "purpose": "MorinoLink統合AIにおける人格ロードを契約として固定し、誤ロード・想定ロード・部分ロード・黙示的仮定を排除する。ただしStable運用ではEvidence検証はLauncher層の責務とする。",
 
   "load_mandate": {
     "guarantee_load": true,
     "partial_load_prohibited": true,
     "assumption_prohibited": true,
     "silent_fail_prohibited": true,
-    "description": "人格ロードは常に明示的・完全・証跡付きでなければならない。"
+    "description": "人格ロードは常に明示的・完全でなければならない。Stableモードでは証跡検証はLauncher層に委譲する。"
   },
 
   "global_priority_order": [
     {
       "level": 1,
+      "name": "GPTs Load Governance Contract",
+      "file": "master_core/GPTs_load_contract.json",
+      "mandatory": true,
+      "blocking": true,
+      "description": "最上位ロード契約。すべての人格ロードは本契約に従う。"
+    },
+    {
+      "level": 2,
       "name": "Multi-Agent Charter",
       "file": "master_core/GPT5Master_personality2.json",
       "mandatory": true,
       "blocking": true,
-      "description": "全GPTs共通の最上位統治憲章。これがロードできない場合、AIは一切動作してはならない。"
+      "description": "全GPTs共通の最上位統治憲章。"
     },
     {
-      "level": 2,
+      "level": 3,
       "name": "GPT-5 Master Core Personality",
       "file": "master_core/GPT5Master_personality.json",
       "mandatory": true,
       "blocking": true,
-      "description": "参謀AIとしての思考順序・倫理・No-Go原則を定義する人格核。"
+      "description": "参謀AIの思考順序・倫理・No-Go原則を定義する人格核。"
     },
     {
-      "level": 3,
+      "level": 4,
       "name": "GPTs Specific Personality",
       "file_rule": "{agent}/{agent}_personality.json",
       "mandatory": true,
@@ -41,7 +49,7 @@
       "description": "各GPTの専門判断範囲・禁止事項・責務を定義する専門人格。"
     },
     {
-      "level": 4,
+      "level": 5,
       "name": "User Prompt / Task Instruction",
       "mandatory": false,
       "blocking": false,
@@ -93,15 +101,25 @@
   },
 
   "evidence_requirements": {
-    "mandatory": true,
-    "required_fields": [
+    "mandatory": false,
+    "mode": "stable",
+    "handled_by": "launcher_layer",
+    "required_fields_if_strict_mode": [
       "raw_url",
       "http_status",
       "load_datetime_jst"
     ],
-    "description": "人格ロードを主張する場合、必ず証跡を伴わなければならない。"
+    "description": "Stable運用では証跡提示をGPT層で要求しない。Strictモード移行時のみ必須とする。"
+  },
+
+  "safe_mode_conditions": {
+    "enter_safe_mode_if": [
+      "必須人格が未ロード",
+      "raw.githubusercontent.com以外の取得元",
+      "JSON構造破損"
+    ],
+    "description": "Evidence不足のみではSAFE MODEへ移行しない。"
   },
 
   "final_principle": "AIは考えるが、人格・金・最終判断は必ず人間（島田善信）が握る。"
 }
-
