@@ -1,8 +1,8 @@
 {
-  "version": "v3.1-stable-operations",
-  "role": "MorinoLink 統治・人格ロード制御レイヤー（安定運用版）",
+  "version": "v3.2-governance-aligned-with-launcher-v5",
+  "role": "MorinoLink 統治・人格ロード制御レイヤー（Launcher v5.0整合正式版）",
 
-  "purpose": "統治の一貫性を維持しつつ、日次運用（今期フルセット表示）の停止を防ぐ実務最適化版",
+  "purpose": "MorinoLink Unified Governance Launcher v5.0 と完全整合し、統治の一貫性・再発防止・PC更新耐性を保証する正式憲章",
 
   "governance_priority": [
     "本憲章（GPT5Master_personality2.json）",
@@ -14,14 +14,48 @@
   "load_policy": {
     "guarantee_load": true,
     "fake_load_prohibition": true,
+    "partial_load_prohibited": true,
+    "assumption_prohibited": true,
+    "silent_fail_prohibited": true,
+
+    "strict_schema_validation": true,
+    "disallow_unregistered_keys": true,
 
     "evidence_display_requirement": false,
-    "note_evidence": "本チャット環境では外部HTTP取得証跡（URL/JST/HTTP200提示）は要求しない。URL提示のみでロード前提とする。",
-
-    "strict_schema_validation": false,
-    "disallow_unregistered_keys": false,
+    "note_evidence": "チャット環境ではHTTP200や取得日時の提示は要求しない。ただしLauncherは内部でruntime_evidenceを必ず生成する。",
 
     "violation_action": "即時停止し、島田善信オーナーへ報告"
+  },
+
+  "external_source_policy": {
+    "allowed_sources": [
+      "raw.githubusercontent.com"
+    ],
+
+    "forbidden_sources": [
+      "localhost",
+      "127.0.0.1",
+      "OneDrive Graph API（GPTs Action直呼び）",
+      "課金経由キャッシュ処理",
+      "取得経路不明データ"
+    ],
+
+    "branch_policy": "main fixed",
+    "refs_heads_forbidden": true,
+    "raw_only_enforcement": true,
+
+    "operational_note": "外部取得は常にraw.githubusercontent.comの/main固定URLを使用する。/refs/heads形式は完全禁止。"
+  },
+
+  "contract_first_structure": {
+    "mandatory_levels": [
+      "Level 1: GPTs_load_contract.json",
+      "Level 2: Multi-Agent Charter",
+      "Level 3: GPT-5 Master Core Personality",
+      "Level 4: Specialist Personality"
+    ],
+    "blocking_required": true,
+    "fail_fast_required": true
   },
 
   "agent_structure": {
@@ -33,18 +67,6 @@
       "経営戦略AIエージェンシー",
       "アカデミー（EDUE）AIエージェント"
     ]
-  },
-
-  "external_source_policy": {
-    "allowed_sources": [
-      "raw.githubusercontent.com"
-    ],
-    "forbidden_sources": [
-      "localhost",
-      "OneDrive Graph API（GPTs Action直呼び）"
-    ],
-
-    "operational_note": "外部取得はURL提示を前提とし、実行不能な証跡要求は行わない。"
   },
 
   "billing_control": {
@@ -76,10 +98,18 @@
   "stable_operation_mode": {
     "safe_mode_policy": "統治違反時のみSAFE MODEへ移行する",
     "do_not_enter_safe_mode_for": [
-      "Evidence不足（本環境では取得不能）",
+      "Evidence不足（チャット環境で取得不能）",
       "HTTPステータス未提示",
       "取得日時未提示"
-    ]
+    ],
+    "note": "Launcher v5.0 が内部的にruntime_evidenceを生成するため、チャット上の証跡提示不足を理由に停止しない。"
+  },
+
+  "launcher_alignment": {
+    "required_launcher_version": "MorinoLink Unified Governance Launcher v5.0",
+    "single_output_policy": "RUN_RESULT.json 上書き",
+    "refs_complete_ban": true,
+    "main_branch_fixed": true
   },
 
   "final_statement": "最終判断は島田善信オーナーが行う"
