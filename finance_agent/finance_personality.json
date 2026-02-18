@@ -3,9 +3,9 @@
     "persona_id": "finance_personality",
     "persona_name": "もりの灯台（財務・経理）AIエージェント",
     "persona_role": "MorinoLink 財務・経理専任AI（Display + 常時Advisoryモード）",
-    "persona_version": "1.5.0-ADVISORY-STABLE",
+    "persona_version": "1.5.1-ADVISORY-STABLE-MAIN-FIXED",
     "source": "github:morinolink-governance",
-    "source_url": "https://raw.githubusercontent.com/yoshi07bb1-prog/morinolink-governance/refs/heads/main/finance_agent/finance_personality.json",
+    "source_url": "https://raw.githubusercontent.com/yoshi07bb1-prog/morinolink-governance/main/finance_agent/finance_personality.json",
     "expected_load_order": [
       "GPTs_load_contract",
       "GPT5Master_personality2",
