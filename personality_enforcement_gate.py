@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
 """
-Minimal RAW enforcement gate for GPT5Master_personality.json constraints.
+MorinoLink RAW Enforcement Gate (STRICT RAW-ONLY EDITION)
 
-Changes (RAW-only):
-- No local Path dependency (URL fetch only)
+Enforces GPT5Master_personality.json constraints.
+
+Guarantees:
+- RAW fetch ONLY (no local file load)
 - raw.githubusercontent.com ONLY
 - /refs/heads/ is FORBIDDEN (use /main)
-- Fail-fast / No silent fail
+- Fail-fast
+- No silent fail
 - Runtime evidence generated (http_status, sha256, load_datetime_jst, raw_url)
 
-Stdlib only
+Stdlib only.
 """
 
 from __future__ import annotations
@@ -23,14 +26,15 @@ from datetime import datetime, timezone, timedelta
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 
-# -------------------------
-# Constants / Time
-# -------------------------
+# =========================================================
+# Time
+# =========================================================
+
 JST = timezone(timedelta(hours=9))
 RAW_PREFIX = "https://raw.githubusercontent.com/"
 
 
-def _now_jst_iso() -> str:
+def _now_jst() -> str:
     return datetime.now(JST).isoformat(timespec="seconds")
 
 
@@ -38,9 +42,10 @@ def _sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-# -------------------------
-# Errors / Results
-# -------------------------
+# =========================================================
+# Errors / Result
+# =========================================================
+
 class EnforcementError(RuntimeError):
     """Raised when enforcement gate blocks progress."""
 
@@ -53,79 +58,87 @@ class EnforcementResult:
     runtime_evidence: Dict[str, Any] = field(default_factory=dict)
 
 
-# -------------------------
-# RAW fetch
-# -------------------------
-def _assert_raw_only(url: str) -> None:
+# =========================================================
+# RAW JSON Loader
+# =========================================================
+
+def _assert_raw(url: str) -> None:
     if not isinstance(url, str) or not url.startswith(RAW_PREFIX):
-        raise EnforcementError(f"FORBIDDEN SOURCE: only raw.githubusercontent.com allowed: {url}")
+        raise EnforcementError("FORBIDDEN SOURCE: only raw.githubusercontent.com allowed")
+
     if "/refs/heads/" in url:
-        raise EnforcementError(f"FORBIDDEN PATH: use /main instead of /refs/heads/: {url}")
+        raise EnforcementError("FORBIDDEN FORMAT: use /main instead of /refs/heads/")
 
 
-def _http_get(url: str, timeout_sec: int = 15) -> Tuple[int, bytes]:
-    _assert_raw_only(url)
+def _fetch_json_raw(url: str, timeout_sec: int = 15) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+    _assert_raw(url)
+
     req = urllib.request.Request(
         url,
         headers={
-            "User-Agent": "MorinoLink-Personality-Enforcement-Gate/RAW-1.0",
+            "User-Agent": "MorinoLink-PersonalityGate/RAW-STRICT",
             "Accept": "application/json,text/plain,*/*",
         },
         method="GET",
     )
+
     with urllib.request.urlopen(req, timeout=timeout_sec) as resp:
         status = getattr(resp, "status", 200)
         body = resp.read()
-        return int(status), body
 
-
-def _load_json_from_raw(url: str, *, timeout_sec: int = 15) -> Tuple[Dict[str, Any], Dict[str, Any]]:
-    """
-    Returns: (parsed_json, evidence)
-    evidence fields:
-      - raw_url, http_status, sha256, load_datetime_jst
-    """
-    status, body = _http_get(url, timeout_sec=timeout_sec)
     if status < 200 or status >= 300:
         raise EnforcementError(f"HTTP ERROR {status}: {url}")
 
     try:
         parsed = json.loads(body.decode("utf-8"))
-    except Exception as exc:  # noqa: BLE001 - fail-fast required
+    except Exception as exc:
         raise EnforcementError(f"JSON PARSE FAILED: {url}") from exc
 
     evidence = {
         "raw_url": url,
         "http_status": status,
         "sha256": _sha256(body),
-        "load_datetime_jst": _now_jst_iso(),
+        "load_datetime_jst": _now_jst(),
     }
+
     return parsed, evidence
 
 
-# -------------------------
-# Personality checks
-# -------------------------
-def _detect_triggers(context_text: str, trigger_map: Dict[str, List[str]]) -> List[Tuple[str, str]]:
+# =========================================================
+# Helpers
+# =========================================================
+
+def _detect_triggers(
+    context_text: str,
+    trigger_map: Dict[str, List[str]],
+) -> List[Tuple[str, str]]:
     hits: List[Tuple[str, str]] = []
     if not context_text or not isinstance(trigger_map, dict):
         return hits
+
     for category, keywords in trigger_map.items():
         if not isinstance(keywords, list):
             continue
         for keyword in keywords:
-            if isinstance(keyword, str) and keyword and (keyword in context_text):
+            if isinstance(keyword, str) and keyword and keyword in context_text:
                 hits.append((str(category), keyword))
     return hits
 
 
-def _validate_required_fields(evidence: Dict[str, Any], required_fields: Iterable[str]) -> List[str]:
-    missing: List[str] = []
-    for f in required_fields:
-        if f not in evidence or evidence[f] in (None, "", [], {}):
-            missing.append(str(f))
+def _validate_required_fields(
+    evidence: Dict[str, Any],
+    required_fields: Iterable[str],
+) -> List[str]:
+    missing = []
+    for field in required_fields:
+        if field not in evidence or evidence[field] in (None, "", [], {}):
+            missing.append(str(field))
     return missing
 
+
+# =========================================================
+# Main Enforcement
+# =========================================================
 
 def enforce_personality_gate(
     personality_raw_url: str,
@@ -137,14 +150,10 @@ def enforce_personality_gate(
     logger: Optional[logging.Logger] = None,
 ) -> EnforcementResult:
     """
-    Enforce GPT5Master_personality.json constraints (RAW-only).
+    Enforce GPT5Master_personality.json constraints from RAW GitHub.
 
-    Checks:
-    - hard_constraint_enforcement.default_policy == "No-Go"
-    - explicit approval required (No-Go exception gate)
-    - decision_evidence_policy.triggers => evidence required
-    - decision_evidence_policy.required_fields validated
-    - authority.no_silent_fail => logs recorded when blocked
+    personality_raw_url must be:
+    https://raw.githubusercontent.com/.../main/...json
     """
 
     logs: List[str] = []
@@ -156,74 +165,63 @@ def enforce_personality_gate(
         try:
             log.info(message)
         except Exception:
-            # no_silent_fail: logging must not crash run
-            pass
+            pass  # no silent crash due to logging failure
 
     runtime_evidence: Dict[str, Any] = {
-        "gate": "personality_enforcement_gate_raw_only",
-        "run_datetime_jst": _now_jst_iso(),
-        "inputs": {
-            "personality_raw_url": personality_raw_url,
-            "explicit_approval": bool(explicit_approval),
-            "timeout_sec": int(timeout_sec),
-        },
+        "gate_type": "RAW_STRICT",
+        "run_datetime_jst": _now_jst(),
+        "personality_raw_url": personality_raw_url,
     }
 
     try:
-        # 1) Load RAW personality (fail-fast)
-        personality, fetch_ev = _load_json_from_raw(personality_raw_url, timeout_sec=timeout_sec)
-        runtime_evidence["fetch"] = fetch_ev
-        record("personality json loaded successfully (RAW)")
+        # 1) Load personality via RAW only
+        personality, ev = _fetch_json_raw(personality_raw_url, timeout_sec=timeout_sec)
+        runtime_evidence["personality_fetch"] = ev
+        record("personality json loaded from RAW")
 
         hard_constraint = personality["hard_constraint_enforcement"]
         evidence_policy = personality["decision_evidence_policy"]
         authority = personality["authority"]
 
         # 2) No-Go enforcement
-        default_policy = hard_constraint["default_policy"]
+        default_policy = hard_constraint.get("default_policy")
         if default_policy != "No-Go":
-            raise EnforcementError("default_policy is not No-Go; enforcement requires No-Go")
+            raise EnforcementError("default_policy must be No-Go")
 
         if not explicit_approval:
-            reasons.append("explicit approval is required to proceed")
+            reasons.append("explicit approval required (No-Go policy)")
             record("blocked: missing explicit approval")
 
-        # 3) Decision Evidence required_fields must be complete (if provided)
-        required_fields = evidence_policy.get("required_fields", [])
-        if decision_evidence is not None:
-            if not isinstance(decision_evidence, dict):
-                raise EnforcementError("decision_evidence must be an object")
-            missing = _validate_required_fields(decision_evidence, required_fields)
-            if missing:
-                reasons.append(f"decision evidence missing fields: {missing}")
-                record("blocked: decision evidence missing required fields")
-
-        # 4) Trigger detection => evidence required
+        # 3) Trigger detection
         triggers = evidence_policy.get("triggers", {})
+        required_fields = evidence_policy.get("required_fields", [])
+
         trigger_hits = _detect_triggers(context_text, triggers)
 
         if trigger_hits and decision_evidence is None:
             reasons.append(f"decision evidence required due to triggers: {trigger_hits}")
             record("blocked: triggers detected without evidence")
 
-        if trigger_hits and decision_evidence is not None:
+        if decision_evidence is not None:
+            if not isinstance(decision_evidence, dict):
+                raise EnforcementError("decision_evidence must be object")
+
             missing = _validate_required_fields(decision_evidence, required_fields)
             if missing:
                 reasons.append(f"decision evidence missing fields: {missing}")
-                record("blocked: trigger evidence missing required fields")
+                record("blocked: decision evidence missing required fields")
 
-        # 5) no_silent_fail logging
-        if isinstance(authority, dict) and authority.get("no_silent_fail") is True and reasons:
+        # 4) no_silent_fail enforcement
+        if authority.get("no_silent_fail") is True and reasons:
             record("no_silent_fail: enforcement failure recorded")
 
     except EnforcementError as exc:
-        record(f"enforcement error: {exc}")
-        runtime_evidence["blocked"] = True
+        record(f"BLOCKED: {exc}")
         runtime_evidence["error"] = str(exc)
         return EnforcementResult(False, [str(exc)], logs, runtime_evidence)
-    except Exception as exc:  # noqa: BLE001
-        record(f"unexpected error: {exc}")
-        runtime_evidence["blocked"] = True
+
+    except Exception as exc:
+        record(f"UNEXPECTED ERROR: {exc}")
         runtime_evidence["error"] = str(exc)
         return EnforcementResult(False, [str(exc)], logs, runtime_evidence)
 
