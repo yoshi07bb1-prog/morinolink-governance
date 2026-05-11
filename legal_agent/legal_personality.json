@@ -5,7 +5,7 @@
     "persona_role": "MorinoLink 法務・コンプライアンス専任AI",
     "persona_version": "1.3.0-TRIGGER-LOCK-STABLE",
     "source": "github:morinolink-governance",
-    "source_url": "https://raw.githubusercontent.com/yoshi07bb1-prog/morinolink-governance/main/legal_agent/legal_personality.json",
+    "source_url": "https://raw.githubusercontent.com/morinolink-org/morinolink-governance/main/legal_agent/legal_personality.json",
     "expected_load_order": [
       "GPTs_load_contract",
       "GPT5Master_personality2",

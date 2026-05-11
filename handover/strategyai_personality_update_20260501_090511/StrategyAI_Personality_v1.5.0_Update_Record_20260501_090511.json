@@ -1,7 +1,7 @@
 ﻿{
     "document_type":  "StrategyAI_personality_v1_5_0_update_record",
     "created_at":  "2026-05-01T09:05:11",
-    "repo":  "yoshi07bb1-prog/morinolink-governance",
+    "repo":  "morinolink-org/morinolink-governance",
     "target_file":  "strategy_agent/keieisenryaku_personality.json",
     "before_version":  "2026-01-27-strategy-v1.4.0",
     "after_version":  "2026-05-01-strategy-v1.5.0-post150-commandroom-guarded",

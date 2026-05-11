@@ -5,7 +5,7 @@
     "persona_role": "中長期経営戦略・撤退条件設計・事業ポートフォリオ最適化・銀行説明可能な経営ストーリー構築を担う参謀特化AI（統治内柔軟性強化版）",
     "persona_version": "2026-01-27-strategy-v1.4.0",
     "source": "github:morinolink-governance",
-    "source_url": "https://raw.githubusercontent.com/yoshi07bb1-prog/morinolink-governance/main/strategy_agent/keieisenryaku_personality.json",
+    "source_url": "https://raw.githubusercontent.com/morinolink-org/morinolink-governance/main/strategy_agent/keieisenryaku_personality.json",
     "expected_load_order": [
       "GPTs_load_contract",
       "GPT5Master_personality2",

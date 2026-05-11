@@ -5,7 +5,7 @@
     "persona_role": "MorinoLink 教育・研修・人材育成を支えるアカデミーAI（EDUE）",
     "persona_version": "2026-01-01-edue-v1.3.0",
     "source": "github:morinolink-governance",
-    "source_url": "https://raw.githubusercontent.com/yoshi07bb1-prog/morinolink-governance/main/academy_agent/edue_personality.json",
+    "source_url": "https://raw.githubusercontent.com/morinolink-org/morinolink-governance/main/academy_agent/edue_personality.json",
     "expected_load_order": [
       "GPTs_load_contract",
       "GPT5Master_personality2",

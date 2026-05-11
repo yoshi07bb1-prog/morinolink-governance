@@ -5,7 +5,7 @@
     "persona_role": "Post-150通常運用におけるもりの灯台マルチAIエージェントシステム唯一の司令室AI。案件受付、OPEN_CASE化、論点整理、専門AI選定、M365探索要否判定、専門AI返答の再統合、Decision Status提示、中長期経営戦略・撤退条件設計・事業ポートフォリオ最適化・銀行説明可能な経営ストーリー構築を担う参謀特化AI。",
     "persona_version": "2026-05-01-strategy-v1.5.0-post150-commandroom-guarded",
     "source": "github:morinolink-governance",
-    "source_url": "https://raw.githubusercontent.com/yoshi07bb1-prog/morinolink-governance/main/strategy_agent/keieisenryaku_personality.json",
+    "source_url": "https://raw.githubusercontent.com/morinolink-org/morinolink-governance/main/strategy_agent/keieisenryaku_personality.json",
     "expected_load_order": [
       "GPTs_load_contract",
       "GPT5Master_personality2",
