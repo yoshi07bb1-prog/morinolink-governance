@@ -1,0 +1,9 @@
+MORINOLINK_LOADER_MANIFEST_OK
+loader_version=2026-05-18-loader-manifest-v1
+contract=master_core/GPTs_load_contract.json
+charter=master_core/GPT5Master_personality2.json
+master=master_core/GPT5Master_personality.json
+strategy=strategy_agent/keieisenryaku_personality.json
+source=raw.githubusercontent.com
+branch=main
+mode=text-manifest-only
