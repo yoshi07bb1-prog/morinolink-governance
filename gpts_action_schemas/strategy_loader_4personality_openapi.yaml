@@ -1,0 +1,85 @@
+openapi: 3.1.0
+info:
+  title: MorinoLink 4 Personality Loader API
+  version: 1.0-4personality-main
+  description: Load MorinoLink GPTs personality files from GitHub raw main branch.
+servers:
+  - url: https://raw.githubusercontent.com
+paths:
+  /yoshi07bb1-prog/morinolink-governance/main/master_core/GPTs_load_contract.json:
+    get:
+      operationId: loadGPTsLoadContract
+      description: Load GPTs load contract JSON from GitHub raw main.
+      parameters: []
+      responses:
+        "200":
+          description: GPTs load contract
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _meta:
+                    type: string
+                additionalProperties: true
+            text/plain:
+              schema:
+                type: string
+  /yoshi07bb1-prog/morinolink-governance/main/master_core/GPT5Master_personality2.json:
+    get:
+      operationId: loadGovernanceCharterV2
+      description: Load governance charter personality JSON from GitHub raw main.
+      parameters: []
+      responses:
+        "200":
+          description: Governance charter personality
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _meta:
+                    type: string
+                additionalProperties: true
+            text/plain:
+              schema:
+                type: string
+  /yoshi07bb1-prog/morinolink-governance/main/master_core/GPT5Master_personality.json:
+    get:
+      operationId: loadMasterCorePersonalityV1
+      description: Load master core personality JSON from GitHub raw main.
+      parameters: []
+      responses:
+        "200":
+          description: Master core personality
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _meta:
+                    type: string
+                additionalProperties: true
+            text/plain:
+              schema:
+                type: string
+  /yoshi07bb1-prog/morinolink-governance/main/strategy_agent/keieisenryaku_personality.json:
+    get:
+      operationId: loadStrategyPersonality
+      description: Load strategy personality JSON from GitHub raw main.
+      parameters: []
+      responses:
+        "200":
+          description: Strategy personality
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _meta:
+                    type: string
+                additionalProperties: true
+            text/plain:
+              schema:
+                type: string
+security: []
