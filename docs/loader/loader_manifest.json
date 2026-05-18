@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "loader": "MorinoLink GitHub Pages Loader Manifest",
+  "version": "2026-05-18-pages-loader-manifest-v1",
+  "source": "github_pages",
+  "mode": "json-only",
+  "files": {
+    "contract": "GPTs_load_contract.json",
+    "charter": "GPT5Master_personality2.json",
+    "master": "GPT5Master_personality.json",
+    "strategy": "strategy_personality.json",
+    "finance": "finance_personality.json",
+    "legal": "legal_personality.json",
+    "hr": "hr_personality.json",
+    "academy": "academy_personality.json"
+  },
+  "completion_claim": "NOT_FULL_AUTONOMOUS_COMPLETION",
+  "full_autonomous_completion": false,
+  "final_decision_owner": "島田善信オーナー"
+}
