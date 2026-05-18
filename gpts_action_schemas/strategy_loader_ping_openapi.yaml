@@ -1,0 +1,21 @@
+openapi: 3.1.0
+info:
+  title: MorinoLink Loader Ping API
+  version: 1.0-text-ping
+  description: Minimal text/plain ping test for raw.githubusercontent.com.
+servers:
+  - url: https://raw.githubusercontent.com
+paths:
+  /yoshi07bb1-prog/morinolink-governance/main/master_core/loader_ping.txt:
+    get:
+      operationId: loadLoaderPing
+      description: Load minimal text ping from GitHub raw.
+      parameters: []
+      responses:
+        "200":
+          description: Loader ping text
+          content:
+            text/plain:
+              schema:
+                type: string
+security: []
