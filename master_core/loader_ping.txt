@@ -1,0 +1,5 @@
+MORINOLINK_LOADER_PING_OK
+version=2026-05-18-loader-ping-v1
+source=raw.githubusercontent.com
+branch=main
+mode=text-plain-only
