@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StrategyAI Startup Load Contract v2",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "persona_sources",
+    "system_state_sources",
+    "startup_trigger",
+    "startup_output_required",
+    "forbidden_actions",
+    "ai_final_decision",
+    "full_autonomous_completion",
+    "final_decision_owner"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "strategy_ai_startup_load_contract_v2"
+    },
+    "startup_trigger": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "persona_sources": {
+      "type": "object",
+      "required": [
+        "gpts_load_contract",
+        "governance_charter",
+        "master_personality",
+        "strategy_personality"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "system_state_sources": {
+      "type": "object",
+      "required": [
+        "work_progress_latest_json",
+        "work_progress_latest_md",
+        "owner_cockpit_latest",
+        "safety_gate_contract",
+        "publication_guard_status",
+        "operational_mvp_status"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "startup_output_required": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "contains": {
+        "const": "current_system_summary"
+      }
+    },
+    "forbidden_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ai_final_decision": {
+      "const": false
+    },
+    "full_autonomous_completion": {
+      "const": false
+    },
+    "final_decision_owner": {
+      "const": "島田善信オーナー"
+    }
+  },
+  "additionalProperties": true
+}

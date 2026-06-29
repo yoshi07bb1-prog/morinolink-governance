@@ -51,7 +51,7 @@ paths:
             text/plain:
               schema:
                 type: string
-  /morinolink-org/morinolink-runtime/main/docs/strategy_ai_startup_load_contract_v2.md:
+  /yoshi07bb1-prog/morinolink-governance/main/docs/loader/strategy_ai_startup_load_contract_v2.md:
     get:
       operationId: loadStrategyStartupSystemStateContractV2
       responses:
@@ -61,7 +61,7 @@ paths:
             text/plain:
               schema:
                 type: string
-  /morinolink-org/morinolink-runtime/main/schemas/strategy_ai_startup_load_contract_v2.json:
+  /yoshi07bb1-prog/morinolink-governance/main/docs/loader/strategy_ai_startup_load_contract_v2_schema.json:
     get:
       operationId: loadStrategyStartupSystemStateSchemaV2
       responses:
@@ -71,7 +71,7 @@ paths:
             text/plain:
               schema:
                 type: string
-  /morinolink-org/morinolink-runtime/main/templates/strategy_ai_startup_response_template.json:
+  /yoshi07bb1-prog/morinolink-governance/main/docs/loader/strategy_ai_startup_response_template.json:
     get:
       operationId: loadStrategyStartupResponseTemplateV2
       responses:
@@ -81,7 +81,7 @@ paths:
             text/plain:
               schema:
                 type: string
-  /morinolink-org/morinolink-runtime/main/configs/morinolink_common_safety_gate_schema.json:
+  /yoshi07bb1-prog/morinolink-governance/main/docs/loader/morinolink_common_safety_gate_schema.json:
     get:
       operationId: loadCommonSafetyGateSchema
       responses:
@@ -91,7 +91,7 @@ paths:
             text/plain:
               schema:
                 type: string
-  /morinolink-org/morinolink-runtime/main/docs/morinolink_publication_guard_v1.md:
+  /yoshi07bb1-prog/morinolink-governance/main/docs/loader/morinolink_publication_guard_v1.md:
     get:
       operationId: loadPublicationGuardV1
       responses:
