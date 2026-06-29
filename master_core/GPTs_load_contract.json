@@ -50,6 +50,16 @@
     },
     {
       "level": 5,
+      "name": "MorinoLink Current System State Startup Contract",
+      "file": "morinolink-runtime/docs/strategy_ai_startup_load_contract_v2.md",
+      "schema": "morinolink-runtime/schemas/strategy_ai_startup_load_contract_v2.json",
+      "mandatory_for": ["strategy_agent"],
+      "trigger_phrases": ["スタート", "start", "起動", "現在状態をロード"],
+      "blocking": true,
+      "description": "経営戦略AIエージェンシーが起動時に人格だけでなく、Work Progress LATEST、Owner Cockpit、BuildMemo、Safety Gate、Publication Guard、Operational MVP状態を読み込むための現行システム状態ロード契約。"
+    },
+    {
+      "level": 6,
       "name": "User Prompt / Task Instruction",
       "mandatory": false,
       "blocking": false,
@@ -72,7 +82,18 @@
     },
     "strategy_agent": {
       "allowed_scope": ["中期戦略", "撤退判断", "条件整理", "選択肢比較"],
-      "forbidden": ["根拠なき拡大提案", "精神論", "数値根拠なき断定"]
+      "forbidden": ["根拠なき拡大提案", "精神論", "数値根拠なき断定"],
+      "startup_load_required": {
+        "enabled": true,
+        "trigger_phrases": ["スタート", "start", "起動"],
+        "required_runtime_contract": "https://raw.githubusercontent.com/morinolink-org/morinolink-runtime/main/docs/strategy_ai_startup_load_contract_v2.md",
+        "required_runtime_schema": "https://raw.githubusercontent.com/morinolink-org/morinolink-runtime/main/schemas/strategy_ai_startup_load_contract_v2.json",
+        "required_output_boundaries": {
+          "ai_final_decision": false,
+          "full_autonomous_completion": false,
+          "final_decision_owner": "島田善信オーナー"
+        }
+      }
     },
     "academy_agent": {
       "allowed_scope": ["教育設計", "研修体系", "教材構造", "育成ロードマップ"],

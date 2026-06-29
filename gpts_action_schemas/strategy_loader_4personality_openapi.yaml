@@ -1,84 +1,143 @@
 openapi: 3.1.0
 info:
-  title: MorinoLink 4 Personality Loader API
-  version: 1.0-4personality-main
-  description: Load MorinoLink GPTs personality files from GitHub raw main branch.
+  title: MorinoLink Strategy Commandroom API
+  version: 7.0-STARTUP-SYSTEM-STATE-LOAD-V2
+  description: |
+    MorinoLink Strategy AI Action schema.
+    raw.githubusercontent.com only.
+    main fixed.
+    refs forbidden.
+    Loads governance personalities plus MorinoLink runtime startup system-state contract v2.
 servers:
   - url: https://raw.githubusercontent.com
 paths:
   /yoshi07bb1-prog/morinolink-governance/main/master_core/GPTs_load_contract.json:
     get:
       operationId: loadGPTsLoadContract
-      description: Load GPTs load contract JSON from GitHub raw main.
-      parameters: []
       responses:
         "200":
-          description: GPTs load contract
+          description: GPTs Load Contract JSON
           content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  _meta:
-                    type: string
-                additionalProperties: true
             text/plain:
               schema:
                 type: string
   /yoshi07bb1-prog/morinolink-governance/main/master_core/GPT5Master_personality2.json:
     get:
       operationId: loadGovernanceCharterV2
-      description: Load governance charter personality JSON from GitHub raw main.
-      parameters: []
       responses:
         "200":
-          description: Governance charter personality
+          description: Governance Charter JSON
           content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  _meta:
-                    type: string
-                additionalProperties: true
             text/plain:
               schema:
                 type: string
   /yoshi07bb1-prog/morinolink-governance/main/master_core/GPT5Master_personality.json:
     get:
       operationId: loadMasterCorePersonalityV1
-      description: Load master core personality JSON from GitHub raw main.
-      parameters: []
       responses:
         "200":
-          description: Master core personality
+          description: Master Core Personality JSON
           content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  _meta:
-                    type: string
-                additionalProperties: true
             text/plain:
               schema:
                 type: string
   /yoshi07bb1-prog/morinolink-governance/main/strategy_agent/keieisenryaku_personality.json:
     get:
       operationId: loadStrategyPersonality
-      description: Load strategy personality JSON from GitHub raw main.
-      parameters: []
       responses:
         "200":
-          description: Strategy personality
+          description: Strategy Personality JSON
           content:
-            application/json:
+            text/plain:
               schema:
-                type: object
-                properties:
-                  _meta:
-                    type: string
-                additionalProperties: true
+                type: string
+  /morinolink-org/morinolink-runtime/main/docs/strategy_ai_startup_load_contract_v2.md:
+    get:
+      operationId: loadStrategyStartupSystemStateContractV2
+      responses:
+        "200":
+          description: StrategyAI Startup Load Contract v2 Markdown
+          content:
+            text/plain:
+              schema:
+                type: string
+  /morinolink-org/morinolink-runtime/main/schemas/strategy_ai_startup_load_contract_v2.json:
+    get:
+      operationId: loadStrategyStartupSystemStateSchemaV2
+      responses:
+        "200":
+          description: StrategyAI Startup Load Contract v2 Schema
+          content:
+            text/plain:
+              schema:
+                type: string
+  /morinolink-org/morinolink-runtime/main/templates/strategy_ai_startup_response_template.json:
+    get:
+      operationId: loadStrategyStartupResponseTemplateV2
+      responses:
+        "200":
+          description: StrategyAI Startup Response Template v2
+          content:
+            text/plain:
+              schema:
+                type: string
+  /morinolink-org/morinolink-runtime/main/configs/morinolink_common_safety_gate_schema.json:
+    get:
+      operationId: loadCommonSafetyGateSchema
+      responses:
+        "200":
+          description: Common Safety Gate Schema
+          content:
+            text/plain:
+              schema:
+                type: string
+  /morinolink-org/morinolink-runtime/main/docs/morinolink_publication_guard_v1.md:
+    get:
+      operationId: loadPublicationGuardV1
+      responses:
+        "200":
+          description: Publication Guard v1
+          content:
+            text/plain:
+              schema:
+                type: string
+  /yoshi07bb1-prog/morinolink-fullset-cache/main/FullsetCache_latest.json:
+    get:
+      operationId: getFullsetCacheLatest
+      responses:
+        "200":
+          description: Fullset Cache JSON
+          content:
+            text/plain:
+              schema:
+                type: string
+  /yoshi07bb1-prog/morinolink-fullset-cache/main/ForecastCache_latest.json:
+    get:
+      operationId: getForecastCacheLatest
+      responses:
+        "200":
+          description: Forecast Cache JSON
+          content:
+            text/plain:
+              schema:
+                type: string
+  /yoshi07bb1-prog/morinolink-fullset-cache/main/ManagementCache_latest.json:
+    get:
+      operationId: getManagementCacheLatest
+      responses:
+        "200":
+          description: Management Cache JSON
+          content:
+            text/plain:
+              schema:
+                type: string
+  /yoshi07bb1-prog/morinolink-runtime/main/M365Returns/latest/M365_RETURN.json:
+    get:
+      operationId: getM365ReturnLatest
+      responses:
+        "200":
+          description: Latest formal M365_RETURN JSON
+          content:
             text/plain:
               schema:
                 type: string
