@@ -14,6 +14,7 @@ def test_strategy_personality_requires_startup_system_state_load():
     protocol = data["startup_system_state_load_protocol"]
 
     assert data["persona_meta"]["persona_version"] == "2026-06-29-strategy-v2.0.0-startup-system-state-aware"
+    assert data["persona_meta"]["completion_state_reference"] == "PASS_MORINOLINK_OPERATIONAL_AUTONOMOUS_SYSTEM_WITH_OWNER_GATE_COMPLETED_FINAL"
     assert "strategy_ai_startup_load_contract_v2" in data["persona_meta"]["expected_load_order"]
     assert "morinolink_current_system_state" in data["persona_meta"]["expected_load_order"]
     assert "スタート" in protocol["trigger_phrases"]
@@ -46,6 +47,8 @@ def test_action_schema_exposes_runtime_startup_contract_v2():
     assert "loadStrategyStartupResponseTemplateV2" in text
     assert "/yoshi07bb1-prog/morinolink-governance/main/docs/loader/strategy_ai_startup_load_contract_v2.md" in text
     assert "/yoshi07bb1-prog/morinolink-governance/main/docs/loader/morinolink_common_safety_gate_schema.json" in text
+    assert "getM365ReturnLatest" not in text
+    assert "M365Returns/latest/M365_RETURN.json" not in text
     assert "/refs/heads/" not in text
     assert "raw.githubusercontent.com" in text
 
@@ -58,3 +61,8 @@ def test_docs_loader_mirrors_updated_json_files():
     assert (ROOT / "docs/loader/strategy_ai_startup_response_template.json").exists()
     assert (ROOT / "docs/loader/morinolink_common_safety_gate_schema.json").exists()
     assert (ROOT / "docs/loader/morinolink_publication_guard_v1.md").exists()
+    startup = load_json("docs/loader/strategy_ai_startup_response_template.json")
+    assert startup["current_status"] == "PASS_MORINOLINK_OPERATIONAL_AUTONOMOUS_SYSTEM_WITH_OWNER_GATE_COMPLETED_FINAL"
+    assert startup["m365_return_latest_policy"]["does_not_cancel_operational_completion"] is True
+    assert startup["m365_save_route"]["formal_route"] == "onedrive_sync_path_save"
+    assert startup["m365_save_route"]["sharepoint_upload_file_adopted"] is False

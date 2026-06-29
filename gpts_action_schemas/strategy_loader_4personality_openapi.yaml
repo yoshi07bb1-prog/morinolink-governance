@@ -131,14 +131,4 @@ paths:
             text/plain:
               schema:
                 type: string
-  /yoshi07bb1-prog/morinolink-runtime/main/M365Returns/latest/M365_RETURN.json:
-    get:
-      operationId: getM365ReturnLatest
-      responses:
-        "200":
-          description: Latest formal M365_RETURN JSON
-          content:
-            text/plain:
-              schema:
-                type: string
 security: []
