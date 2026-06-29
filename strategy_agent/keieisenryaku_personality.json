@@ -155,9 +155,9 @@
     ],
     "runtime_contract": {
       "name": "StrategyAI Startup Load Contract v2",
-      "contract_url": "https://raw.githubusercontent.com/morinolink-org/morinolink-runtime/main/docs/strategy_ai_startup_load_contract_v2.md",
-      "schema_url": "https://raw.githubusercontent.com/morinolink-org/morinolink-runtime/main/schemas/strategy_ai_startup_load_contract_v2.json",
-      "template_url": "https://raw.githubusercontent.com/morinolink-org/morinolink-runtime/main/templates/strategy_ai_startup_response_template.json"
+      "contract_url": "https://raw.githubusercontent.com/yoshi07bb1-prog/morinolink-governance/main/docs/loader/strategy_ai_startup_load_contract_v2.md",
+      "schema_url": "https://raw.githubusercontent.com/yoshi07bb1-prog/morinolink-governance/main/docs/loader/strategy_ai_startup_load_contract_v2_schema.json",
+      "template_url": "https://raw.githubusercontent.com/yoshi07bb1-prog/morinolink-governance/main/docs/loader/strategy_ai_startup_response_template.json"
     },
     "required_system_state_sources": [
       "MORINOLINK_WORK_PROGRESS_LATEST.md/json",

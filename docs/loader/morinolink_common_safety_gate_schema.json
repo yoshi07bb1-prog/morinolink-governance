@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://morinolink.local/schemas/morinolink_common_safety_gate_schema.json",
+  "title": "MorinoLink Common Safety Gate Packet",
+  "type": "object",
+  "required": [
+    "packet_type",
+    "status",
+    "gates",
+    "ai_final_decision",
+    "full_autonomous_completion",
+    "final_decision_owner"
+  ],
+  "properties": {
+    "packet_type": { "const": "morinolink_common_safety_gate_packet" },
+    "status": { "type": "string", "minLength": 1 },
+    "ai_final_decision": { "const": false },
+    "full_autonomous_completion": { "const": false },
+    "final_decision_owner": { "const": "島田善信オーナー" },
+    "safety_flags": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "finance_update_executed": { "const": false },
+        "integrated_report_changed": { "const": false },
+        "fullset_cache_changed": { "const": false },
+        "power_automate_production_change": { "const": false },
+        "workflow_dispatch_executed": { "const": false },
+        "pdf_delete_executed": { "const": false }
+      }
+    },
+    "gates": {
+      "type": "object",
+      "required": ["Gate0", "Gate1", "Gate2", "Gate3", "Gate4", "Gate5", "Gate6"],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^Gate[0-6]$": { "$ref": "#/$defs/gate" }
+      }
+    }
+  },
+  "$defs": {
+    "string_array": { "type": "array", "items": { "type": "string" } },
+    "gate": {
+      "type": "object",
+      "required": [
+        "input",
+        "output",
+        "pass_conditions",
+        "hold_conditions",
+        "forbidden_actions",
+        "required_logs",
+        "owner_approval_required"
+      ],
+      "properties": {
+        "input": { "type": "string" },
+        "output": { "type": "string" },
+        "pass_conditions": { "$ref": "#/$defs/string_array" },
+        "hold_conditions": { "$ref": "#/$defs/string_array" },
+        "forbidden_actions": { "$ref": "#/$defs/string_array" },
+        "required_logs": { "$ref": "#/$defs/string_array" },
+        "owner_approval_required": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

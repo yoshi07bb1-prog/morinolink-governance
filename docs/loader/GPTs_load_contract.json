@@ -86,8 +86,8 @@
       "startup_load_required": {
         "enabled": true,
         "trigger_phrases": ["スタート", "start", "起動"],
-        "required_runtime_contract": "https://raw.githubusercontent.com/morinolink-org/morinolink-runtime/main/docs/strategy_ai_startup_load_contract_v2.md",
-        "required_runtime_schema": "https://raw.githubusercontent.com/morinolink-org/morinolink-runtime/main/schemas/strategy_ai_startup_load_contract_v2.json",
+        "required_runtime_contract": "https://raw.githubusercontent.com/yoshi07bb1-prog/morinolink-governance/main/docs/loader/strategy_ai_startup_load_contract_v2.md",
+        "required_runtime_schema": "https://raw.githubusercontent.com/yoshi07bb1-prog/morinolink-governance/main/docs/loader/strategy_ai_startup_load_contract_v2_schema.json",
         "required_output_boundaries": {
           "ai_final_decision": false,
           "full_autonomous_completion": false,
