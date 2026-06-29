@@ -18,7 +18,7 @@
     "owner_cockpit_latest": "M365Returns/OperationRegistry/OwnerCockpit/CURRENT/today_chat_brief.txt",
     "safety_gate_contract": "configs/morinolink_common_safety_gate_schema.json",
     "publication_guard_status": "docs/morinolink_publication_guard_v1.md",
-    "operational_mvp_status": "BuildMemo latest PASS_MORINOLINK_OPERATIONAL_AUTONOMOUS_SYSTEM_WITH_OWNER_GATE_COMPLETED_FINAL"
+    "operational_mvp_status": "BuildMemo/LATEST verified=true PASS_MORINOLINK_OPERATIONAL_AUTONOMOUS_SYSTEM_WITH_OWNER_GATE_COMPLETED_FINAL"
   },
   "startup_output_required": [
     "load_status_by_layer",
@@ -29,7 +29,10 @@
     "missing_evidence",
     "forbidden_actions",
     "recommended_next_actions",
-    "boundary_flags"
+    "boundary_flags",
+    "current_status",
+    "m365_return_latest_status",
+    "m365_save_route"
   ],
   "forbidden_actions": [
     "AI final decision",
@@ -44,5 +47,24 @@
   ],
   "ai_final_decision": false,
   "full_autonomous_completion": false,
-  "final_decision_owner": "島田善信オーナー"
+  "final_decision_owner": "島田善信オーナー",
+  "current_status": "PASS_MORINOLINK_OPERATIONAL_AUTONOMOUS_SYSTEM_WITH_OWNER_GATE_COMPLETED_FINAL",
+  "legacy_statuses": [
+    "LIMITED_E2E_COMPLETION"
+  ],
+  "m365_save_route": {
+    "formal_route": "onedrive_sync_path_save",
+    "base": "M365Returns",
+    "sharepoint_upload_file_adopted": false
+  },
+  "m365_return_latest_policy": {
+    "on_404": "HOLD_M365_RETURN_LATEST_NOT_PUBLISHED",
+    "does_not_cancel_operational_completion": true
+  },
+  "completed_capabilities_evidence": {
+    "slack_real_notification": true,
+    "teams_real_notice": true,
+    "m365_save": true,
+    "buildmemo_latest_verified": true
+  }
 }

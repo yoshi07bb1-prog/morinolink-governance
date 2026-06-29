@@ -17,7 +17,7 @@
     "compatible_master_version": ">=7.0",
     "last_updated": "2026-06-29",
     "update_reason": "StrategyAI起動時に人格だけでなく、もりの灯台マルチAIシステムエージェントシステムの現行状態、完了済み機能、Owner Review待ち、HOLD、禁止事項を読み込むStartup Load Contract v2を追加。",
-    "completion_state_reference": "LIMITED_OPERATIONAL_COMPLETION"
+    "completion_state_reference": "PASS_MORINOLINK_OPERATIONAL_AUTONOMOUS_SYSTEM_WITH_OWNER_GATE_COMPLETED_FINAL"
   },
   "positioning": {
     "system_role": "GPTs（専門AI：経営戦略／Post-150通常運用司令室）",
@@ -108,7 +108,7 @@
     ]
   },
   "post150_commandroom_protocol": {
-    "normal_operation_state": "LIMITED_OPERATIONAL_COMPLETION",
+    "normal_operation_state": "PASS_MORINOLINK_OPERATIONAL_AUTONOMOUS_SYSTEM_WITH_OWNER_GATE_COMPLETED_FINAL",
     "primary_entry_point": "経営戦略AIエージェンシー",
     "case_flow": [
       "案件受付",
@@ -161,6 +161,7 @@
     },
     "required_system_state_sources": [
       "MORINOLINK_WORK_PROGRESS_LATEST.md/json",
+      "BuildMemo/LATEST verified=true PASS_MORINOLINK_OPERATIONAL_AUTONOMOUS_SYSTEM_WITH_OWNER_GATE_COMPLETED_FINAL",
       "Owner Cockpit latest json/md",
       "BuildMemo latest PASS/HOLD records",
       "Common Safety Gate schema/validator status",
@@ -189,6 +190,8 @@
       "handoverや通知だけを最終判断証明として扱わない",
       "AIが最終判断したと表現しない",
       "Owner Review Packetを省略しない",
+      "M365_RETURN_latest 404はHOLD表示するが、BuildMemo/LATEST verified=true のOperational MVP完成を取り消さない",
+      "M365保存はOneDrive同期パス保存を正式ルートとし、SharePoint connector upload_fileは不採用とする",
       "M365_RETURN、Teams通知、CaseFiles本体をOPEN_CASE完了証明として扱わない"
     ]
   },

@@ -9,6 +9,11 @@
     "startup_trigger",
     "startup_output_required",
     "forbidden_actions",
+    "current_status",
+    "legacy_statuses",
+    "m365_save_route",
+    "m365_return_latest_policy",
+    "completed_capabilities_evidence",
     "ai_final_decision",
     "full_autonomous_completion",
     "final_decision_owner"
@@ -73,6 +78,71 @@
     },
     "final_decision_owner": {
       "const": "島田善信オーナー"
+    },
+    "current_status": {
+      "const": "PASS_MORINOLINK_OPERATIONAL_AUTONOMOUS_SYSTEM_WITH_OWNER_GATE_COMPLETED_FINAL"
+    },
+    "legacy_statuses": {
+      "type": "array",
+      "contains": {
+        "const": "LIMITED_E2E_COMPLETION"
+      }
+    },
+    "m365_save_route": {
+      "type": "object",
+      "required": [
+        "formal_route",
+        "sharepoint_upload_file_adopted"
+      ],
+      "properties": {
+        "formal_route": {
+          "const": "onedrive_sync_path_save"
+        },
+        "sharepoint_upload_file_adopted": {
+          "const": false
+        }
+      },
+      "additionalProperties": true
+    },
+    "m365_return_latest_policy": {
+      "type": "object",
+      "required": [
+        "on_404",
+        "does_not_cancel_operational_completion"
+      ],
+      "properties": {
+        "on_404": {
+          "const": "HOLD_M365_RETURN_LATEST_NOT_PUBLISHED"
+        },
+        "does_not_cancel_operational_completion": {
+          "const": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "completed_capabilities_evidence": {
+      "type": "object",
+      "required": [
+        "slack_real_notification",
+        "teams_real_notice",
+        "m365_save",
+        "buildmemo_latest_verified"
+      ],
+      "properties": {
+        "slack_real_notification": {
+          "const": true
+        },
+        "teams_real_notice": {
+          "const": true
+        },
+        "m365_save": {
+          "const": true
+        },
+        "buildmemo_latest_verified": {
+          "const": true
+        }
+      },
+      "additionalProperties": true
     }
   },
   "additionalProperties": true
