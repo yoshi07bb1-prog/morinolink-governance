@@ -47,8 +47,8 @@ def test_action_schema_exposes_runtime_startup_contract_v2():
     assert "loadStrategyStartupResponseTemplateV2" in text
     assert "/yoshi07bb1-prog/morinolink-governance/main/docs/loader/strategy_ai_startup_load_contract_v2.md" in text
     assert "/yoshi07bb1-prog/morinolink-governance/main/docs/loader/morinolink_common_safety_gate_schema.json" in text
-    assert "getM365ReturnLatest" not in text
-    assert "M365Returns/latest/M365_RETURN.json" not in text
+    assert "getM365ReturnLatest" in text
+    assert "/yoshi07bb1-prog/morinolink-governance/main/docs/loader/M365_RETURN_latest.json" in text
     assert "/refs/heads/" not in text
     assert "raw.githubusercontent.com" in text
 
@@ -61,6 +61,9 @@ def test_docs_loader_mirrors_updated_json_files():
     assert (ROOT / "docs/loader/strategy_ai_startup_response_template.json").exists()
     assert (ROOT / "docs/loader/morinolink_common_safety_gate_schema.json").exists()
     assert (ROOT / "docs/loader/morinolink_publication_guard_v1.md").exists()
+    m365 = load_json("docs/loader/M365_RETURN_latest.json")
+    assert m365["m365_return_latest_status"] == "REFERENCE_SUMMARY_AVAILABLE"
+    assert m365["current_status"] == "PASS_MORINOLINK_OPERATIONAL_AUTONOMOUS_SYSTEM_WITH_OWNER_GATE_COMPLETED_FINAL"
     startup = load_json("docs/loader/strategy_ai_startup_response_template.json")
     assert startup["current_status"] == "PASS_MORINOLINK_OPERATIONAL_AUTONOMOUS_SYSTEM_WITH_OWNER_GATE_COMPLETED_FINAL"
     assert startup["m365_return_latest_policy"]["does_not_cancel_operational_completion"] is True

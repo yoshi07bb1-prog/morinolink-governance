@@ -131,4 +131,13 @@ paths:
             text/plain:
               schema:
                 type: string
-security: []
+  /yoshi07bb1-prog/morinolink-governance/main/docs/loader/M365_RETURN_latest.json:
+    get:
+      operationId: getM365ReturnLatest
+      responses:
+        "200":
+          description: Optional legacy M365_RETURN latest reference summary. This is not completion proof. BuildMemo / LATEST verified=true remains source of truth.
+          content:
+            text/plain:
+              schema:
+                type: stringsecurity: []

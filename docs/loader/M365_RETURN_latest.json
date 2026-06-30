@@ -1,0 +1,33 @@
+{
+  "record_type": "M365_RETURN_LATEST_REFERENCE_SUMMARY",
+  "schema_version": "2026-06-30-reference-summary-v1",
+  "generated_at_jst": "2026-06-30T00:00:00+09:00",
+  "current_status": "PASS_MORINOLINK_OPERATIONAL_AUTONOMOUS_SYSTEM_WITH_OWNER_GATE_COMPLETED_FINAL",
+  "m365_return_latest_status": "REFERENCE_SUMMARY_AVAILABLE",
+  "source_of_truth": [
+    "MORINOLINK_WORK_PROGRESS_LATEST",
+    "BuildMemo",
+    "LATEST verified=true"
+  ],
+  "official_m365_save_route": "ONEDRIVE_SYNC_PATH_SAVE",
+  "sharepoint_connector_upload_file_adopted": false,
+  "purpose": "GPTs startup reference summary to prevent M365_RETURN_latest raw endpoint 404 HOLD.",
+  "not_completion_proof": true,
+  "not_ai_final_decision": true,
+  "not_accounting_finalization": true,
+  "notes": [
+    "This file is a safe latest-reference summary only.",
+    "Operational completion must be verified against BuildMemo and MORINOLINK_WORK_PROGRESS_LATEST.",
+    "Slack/Teams/M365 evidence alone is not final judgment proof."
+  ],
+  "boundaries": {
+    "ai_final_decision": false,
+    "full_autonomous_completion": false,
+    "final_decision_owner": "島田善信オーナー",
+    "finance_update_executed": false,
+    "integrated_report_updated": false,
+    "fullset_cache_updated": false,
+    "gate3_executed": false,
+    "workflow_dispatch_executed": false
+  }
+}
